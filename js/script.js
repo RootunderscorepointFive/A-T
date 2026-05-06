@@ -41,6 +41,8 @@
   document.querySelectorAll('a, button, .svc-tile, .team-card, .metric-cell, .pillar, .contact-item, .wa-float').forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('cur-hover'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('cur-hover'));
+    el.addEventListener('focus', () => document.body.classList.add('cur-hover'));
+    el.addEventListener('blur', () => document.body.classList.remove('cur-hover'));
   });
 
   const emailUser = 'info';
@@ -51,31 +53,6 @@
     const anchor = el.closest('a');
     if (anchor) anchor.href = 'mailto:' + fullEmail;
   });
-
-  // Normalize known mojibake strings from mixed file encodings.
-  document.title = 'A&T Group - Business Transformation Partners';
-  const ogTitle = document.querySelector('meta[property="og:title"]');
-  const twTitle = document.querySelector('meta[property="twitter:title"]');
-  if (ogTitle) ogTitle.setAttribute('content', 'A&T Group - Business Transformation Partners');
-  if (twTitle) twTitle.setAttribute('content', 'A&T Group - Business Transformation Partners');
-  const formSub = document.querySelector('.form-sub');
-  if (formSub) formSub.textContent = 'Free consultation - No obligation - Response within 24 hours';
-  const servicePlaceholder = document.querySelector('#fs option[value=""]');
-  if (servicePlaceholder) servicePlaceholder.textContent = 'Select a service...';
-  const messageField = document.getElementById('fm');
-  if (messageField) messageField.setAttribute('placeholder', "Tell us about your business and what you'd like to achieve...");
-  const hoursRows = document.querySelectorAll('.hours-row');
-  if (hoursRows[0] && hoursRows[0].children[0] && hoursRows[0].children[1]) {
-    hoursRows[0].children[0].textContent = 'Monday - Friday';
-    hoursRows[0].children[1].textContent = '8:00 AM - 5:00 PM';
-  }
-  if (hoursRows[1] && hoursRows[1].children[1]) {
-    hoursRows[1].children[1].textContent = '9:00 AM - 1:00 PM';
-  }
-  const successCopy = document.querySelector('#form-ok p');
-  if (successCopy) successCopy.textContent = 'Thank you - a member of our team will be in touch within 24 business hours.';
-  const resetLink = document.getElementById('reset-btn');
-  if (resetLink) resetLink.textContent = '\u2190 Send another message';
 
   const nav = document.getElementById('nav');
   const sections = Array.from(document.querySelectorAll('section[id]'));
