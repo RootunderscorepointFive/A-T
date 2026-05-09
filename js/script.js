@@ -17,9 +17,11 @@
   const subBtn = document.getElementById("sub-btn");
   const resetBtn = document.getElementById("reset-btn");
   const revealItems = document.querySelectorAll(".rv");
+  const mobLinks = mob ? Array.from(mob.querySelectorAll("a")) : [];
 
   let toastTimer;
   let formStatus = document.getElementById("form-status");
+  let lastFocusedElement = null;
 
   window.addEventListener("error", function (event) {
     console.error("A&T Runtime Error:", event.error);
@@ -42,24 +44,53 @@
     }
     if (mob) {
       mob.classList.remove("open");
+      mob.setAttribute("aria-hidden", "true");
     }
     document.body.style.overflow = "";
   }
 
+  function openMenu() {
+    if (!ham || !mob) {
+      return;
+    }
+
+    lastFocusedElement = document.activeElement;
+    ham.classList.add("open");
+    ham.setAttribute("aria-expanded", "true");
+    mob.classList.add("open");
+    mob.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    if (mobLinks[0]) {
+      mobLinks[0].focus();
+    }
+  }
+
   if (ham) {
     ham.addEventListener("click", function () {
-      const open = ham.classList.toggle("open");
-      if (mob) {
-        mob.classList.toggle("open", open);
+      const open = !ham.classList.contains("open");
+      if (open) {
+        openMenu();
+      } else {
+        closeMenu();
+        ham.focus();
       }
-      ham.setAttribute("aria-expanded", String(open));
-      document.body.style.overflow = open ? "hidden" : "";
     });
   }
 
   document.addEventListener("click", function (e) {
     if (ham && mob && !ham.contains(e.target) && !mob.contains(e.target)) {
       closeMenu();
+    }
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && ham && ham.classList.contains("open")) {
+      closeMenu();
+      if (lastFocusedElement instanceof HTMLElement) {
+        lastFocusedElement.focus();
+      } else {
+        ham.focus();
+      }
     }
   });
 

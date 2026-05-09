@@ -38,6 +38,36 @@ body {
   overflow-x: hidden;
 }
 
+main {
+  display: block;
+}
+
+section[id] {
+  scroll-margin-top: 92px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10000;
+  background: var(--teal);
+  color: var(--ink);
+  padding: 0.75rem 1rem;
+  border-radius: 2px;
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: translateY(-140%);
+  transition: transform 0.25s var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
 :focus-visible {
   outline: 2px solid var(--teal);
   outline-offset: 4px;
@@ -78,15 +108,21 @@ nav.scrolled {
 }
 
 .nav-logo {
-  font-size: 1.55rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
   color: var(--white);
   text-decoration: none;
 }
 
-.nav-logo span {
-  color: var(--teal);
+.brand-lockup {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 42px;
+  object-fit: contain;
+  display: block;
 }
 
 .nav-links {
@@ -213,6 +249,10 @@ nav.scrolled {
 
 .mob-menu a:hover {
   color: var(--teal);
+}
+
+.mob-menu a:focus-visible {
+  color: var(--white);
 }
 
 #home {
@@ -1482,15 +1522,15 @@ footer {
 }
 
 .f-brand .f-logo {
-  font-size: 1.55rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
   color: var(--white);
   margin-bottom: 0.9rem;
 }
 
-.f-brand .f-logo span {
-  color: var(--teal);
+.f-brand .f-logo .brand-lockup {
+  max-height: 48px;
 }
 
 .f-brand p {
@@ -1721,6 +1761,14 @@ footer {
 }
 
 @media (max-width: 640px) {
+  .nav-logo {
+    min-height: 40px;
+  }
+
+  .nav-logo .brand-lockup {
+    max-height: 36px;
+  }
+
   .services-grid,
   .form-row,
   .footer-grid,
