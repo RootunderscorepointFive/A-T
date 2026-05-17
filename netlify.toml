@@ -1,0 +1,17 @@
+[build]
+  publish = "."
+  command = ""
+
+[context.production]
+  # Production context: all deploys from the main branch
+  # will inherit these settings.
+  branch = "main"
+
+[context.branch-deploy]
+  # Branch deploy context: all deploys from any branch
+  # will inherit these settings.
+  branch = "*"
+
+[context.deploy-preview]
+  # Deploy Preview context: all deploys from Pull Request
+  # will inherit these settings.
