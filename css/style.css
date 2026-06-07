@@ -490,6 +490,13 @@ nav.scrolled {
   display: block;
 }
 
+.hero-photo-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(11, 31, 34, 0.55) 0%, transparent 50%);
+  border-radius: 4px;
+}
+
 .hero-badge {
   position: absolute;
   bottom: -1.5rem;
@@ -687,6 +694,10 @@ nav.scrolled {
   display: block;
 }
 
+.tag-on-dark {
+  color: var(--teal-light);
+}
+
 .h2-light,
 .h2-dark {
   font-size: clamp(2rem, 3.5vw, 3.2rem);
@@ -753,6 +764,10 @@ nav.scrolled {
   line-height: 1.82;
   color: var(--body-text);
   margin-bottom: 1.4rem;
+}
+
+.company-copy .company-intro {
+  margin-top: 1.5rem;
 }
 
 .company-copy p strong {
@@ -1173,6 +1188,18 @@ nav.scrolled {
   box-shadow: 0 6px 20px rgba(0, 154, 170, 0.25);
 }
 
+.tc-badge-compact {
+  font-size: 0.8rem;
+}
+
+.tc-badge-check {
+  font-size: 1.4rem;
+}
+
+.tc-badge-small {
+  font-size: 0.85rem;
+}
+
 .tc-title {
   font-size: 0.9rem;
   font-weight: 700;
@@ -1304,6 +1331,10 @@ nav.scrolled {
   color: var(--white);
 }
 
+.hours-row .muted-hours-value {
+  color: var(--white-50);
+}
+
 .hours-row.accent span:first-child {
   color: var(--teal);
 }
@@ -1413,6 +1444,10 @@ textarea.fc {
   display: none;
 }
 
+.hp-field {
+  display: none;
+}
+
 .form-status {
   min-height: 1.1rem;
   margin: 0.1rem 0 0.75rem;
@@ -1508,6 +1543,10 @@ textarea.fc {
   opacity: 0.65;
 }
 
+.spin-icon {
+  animation: spin 1s linear infinite;
+}
+
 footer {
   background: var(--ink);
   border-top: 1px solid var(--white-08);
@@ -1580,6 +1619,15 @@ footer {
 .footer-bottom p {
   font-size: 0.72rem;
   color: var(--white-50);
+}
+
+.footer-inline-link {
+  color: inherit;
+}
+
+.back-home-link {
+  color: var(--teal);
+  text-decoration: none;
 }
 
 .social-links {
@@ -1693,6 +1741,55 @@ footer {
   to {
     transform: rotate(360deg);
   }
+}
+
+.legal-content {
+  padding: 140px 0 80px;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
+  color: var(--charcoal);
+}
+
+.legal-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: var(--ink);
+}
+
+.legal-content h2 {
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--ink);
+}
+
+.legal-content p {
+  margin-bottom: 1.2rem;
+}
+
+.legal-content ul {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.legal-content li {
+  margin-bottom: 0.5rem;
+}
+
+.last-updated {
+  font-size: 0.9rem;
+  color: var(--body-text);
+  margin-bottom: 3rem;
+  display: block;
+}
+
+.placeholder-box {
+  background: #fff8e1;
+  border-left: 4px solid #ffc107;
+  padding: 1rem;
+  margin: 2rem 0;
+  font-size: 0.9rem;
 }
 
 @media (max-width: 1024px) {
