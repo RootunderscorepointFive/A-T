@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; connect-src 'self' https://formspree.io;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; upgrade-insecure-requests;">
     <title>Privacy Policy | A&T Group</title>
     <meta name="description" content="Privacy Policy and Legal Disclosures for A&T Group South Africa.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,49 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=20260509">
-    <style>
-        .legal-content {
-            padding: 140px 0 80px;
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.8;
-            color: var(--charcoal);
-        }
-        .legal-content h1 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: var(--ink);
-        }
-        .legal-content h2 {
-            font-size: 1.5rem;
-            margin-top: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--ink);
-        }
-        .legal-content p {
-            margin-bottom: 1.2rem;
-        }
-        .legal-content ul {
-            margin-bottom: 1.5rem;
-            padding-left: 1.5rem;
-        }
-        .legal-content li {
-            margin-bottom: 0.5rem;
-        }
-        .last-updated {
-            font-size: 0.9rem;
-            color: var(--body-text);
-            margin-bottom: 3rem;
-            display: block;
-        }
-        .placeholder-box {
-            background: #fff8e1;
-            border-left: 4px solid #ffc107;
-            padding: 1rem;
-            margin: 2rem 0;
-            font-size: 0.9rem;
-        }
-    </style>
 </head>
 <body>
 
@@ -127,7 +84,7 @@
     <div class="section-wrap">
         <div class="footer-bottom">
             <p>&copy; 2026 A&T Group. All rights reserved. Registered in South Africa.</p>
-            <p><a href="index.html" style="color:var(--teal); text-decoration:none;">Back to Home</a></p>
+            <p><a href="index.html" class="back-home-link">Back to Home</a></p>
         </div>
     </div>
 </footer>
