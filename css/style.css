@@ -1792,6 +1792,115 @@ footer {
   font-size: 0.9rem;
 }
 
+.ledgrflow-bridge {
+  background: var(--cream);
+  padding: 7rem 0;
+}
+
+.ledgrflow-bridge-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: center;
+}
+
+.ledgrflow-bridge-copy h2 {
+  color: var(--ink);
+  font-size: clamp(2.8rem, 5vw, 5.8rem);
+  line-height: 0.96;
+  letter-spacing: -0.055em;
+  margin: 1.2rem 0 1.5rem;
+}
+
+.ledgrflow-bridge-copy h2 em {
+  color: var(--teal);
+  font-style: normal;
+}
+
+.ledgrflow-bridge-copy p {
+  max-width: 680px;
+  color: var(--body-text);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.ledgrflow-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.ledgrflow-text-link {
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid var(--teal);
+  padding-bottom: 0.25rem;
+}
+
+.ledgrflow-bridge-card {
+  background: #0f6e56;
+  color: #f5f2ec;
+  padding: clamp(2rem, 4vw, 3.5rem);
+  border-radius: 4px;
+  box-shadow: 0 24px 60px rgba(13, 31, 34, 0.16);
+}
+
+.lf-lockup {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.lf-mark {
+  width: 52px;
+  height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f2ec;
+  color: #0f6e56;
+  border-radius: 11px;
+  font-size: 1rem;
+}
+
+.ledgrflow-bridge-card p {
+  color: rgba(245, 242, 236, 0.8);
+  line-height: 1.7;
+}
+
+.ledgrflow-bridge-card ul {
+  list-style: none;
+  margin-top: 1.75rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.ledgrflow-bridge-card li {
+  padding-left: 1.25rem;
+  position: relative;
+  font-size: 0.88rem;
+}
+
+.ledgrflow-bridge-card li::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #f5f2ec;
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+}
+
 @media (max-width: 1024px) {
   nav {
     padding: 0 1.5rem;
@@ -1835,6 +1944,7 @@ footer {
   }
 
   .company-grid,
+  .ledgrflow-bridge-grid,
   .team-grid,
   .contact-grid {
     grid-template-columns: 1fr;
@@ -1906,6 +2016,21 @@ footer {
 
   .hero-photo-wrap {
     max-width: 100%;
+  }
+
+  .ledgrflow-bridge {
+    padding: 5rem 0;
+  }
+
+  .ledgrflow-actions {
+    align-items: stretch;
+  }
+
+  .ledgrflow-actions .btn-teal,
+  .ledgrflow-text-link {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
   }
 
   .hero-pill {
