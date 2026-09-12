@@ -329,3 +329,96 @@
     });
   }
 })();
+
+
+(function () {
+  "use strict";
+
+  const assessment = document.getElementById("readiness-assessment");
+  if (!assessment) {
+    return;
+  }
+
+  const checkboxes = Array.from(assessment.querySelectorAll('input[type="checkbox"]'));
+  const groups = Array.from(assessment.querySelectorAll(".checklist-group"));
+  const scoreValue = document.getElementById("score-value");
+  const scoreProgress = document.getElementById("score-progress");
+  const scoreLabel = document.getElementById("score-label");
+  const scoreSummary = document.getElementById("score-summary");
+  const scoreCount = document.getElementById("score-count");
+  const priorityWrap = document.getElementById("priority-wrap");
+  const priorityList = document.getElementById("priority-list");
+  const reset = document.getElementById("score-reset");
+
+  function getResult(score, checked) {
+    if (checked === 0) {
+      return {
+        label: "Start the assessment",
+        summary: "Select every statement that is consistently true in your business."
+      };
+    }
+    if (score < 40) {
+      return {
+        label: "Immediate attention needed",
+        summary: "Important accounting foundations are missing. Start with the priority areas below before the gaps create more risk."
+      };
+    }
+    if (score < 70) {
+      return {
+        label: "Foundation in progress",
+        summary: "Some good practices are in place, but inconsistency may still affect reporting, compliance, and decisions."
+      };
+    }
+    if (score < 88) {
+      return {
+        label: "Mostly ready",
+        summary: "Your accounting foundation is working. Closing the remaining gaps will make it more dependable and decision-ready."
+      };
+    }
+    return {
+      label: "Ready to support growth",
+      summary: "Your core practices are in good shape. Keep them consistent and review them as the business becomes more complex."
+    };
+  }
+
+  function updateAssessment() {
+    const checked = checkboxes.filter(function (box) { return box.checked; }).length;
+    const score = Math.round((checked / checkboxes.length) * 100);
+    const result = getResult(score, checked);
+    const priorities = groups.filter(function (group) {
+      return group.querySelectorAll('input[type="checkbox"]:checked').length < 3;
+    }).map(function (group) {
+      return group.getAttribute("data-area");
+    });
+
+    scoreValue.textContent = String(score);
+    scoreProgress.style.width = score + "%";
+    scoreLabel.textContent = result.label;
+    scoreSummary.textContent = result.summary;
+    scoreCount.textContent = String(checked);
+
+    priorityList.innerHTML = "";
+    priorities.forEach(function (area) {
+      const item = document.createElement("li");
+      item.textContent = area;
+      priorityList.appendChild(item);
+    });
+    priorityWrap.hidden = checked === 0 || priorities.length === 0;
+  }
+
+  checkboxes.forEach(function (box) {
+    box.addEventListener("change", updateAssessment);
+  });
+
+  if (reset) {
+    reset.addEventListener("click", function () {
+      checkboxes.forEach(function (box) {
+        box.checked = false;
+      });
+      updateAssessment();
+      checkboxes[0].focus();
+    });
+  }
+
+  updateAssessment();
+})();
