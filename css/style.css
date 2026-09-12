@@ -2461,6 +2461,117 @@ footer {
   color: var(--ink);
 }
 
+.assessment-result-actions {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 1.5rem;
+}
+
+.score-primary-action,
+.score-secondary-action {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 42px;
+  padding: 0.7rem 1rem;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+}
+
+.score-primary-action {
+  border: 1px solid var(--teal);
+  background: var(--teal);
+  color: var(--ink);
+}
+
+.score-secondary-action {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--white);
+}
+
+.score-primary-action:hover,
+.score-primary-action:focus-visible {
+  background: var(--teal-light);
+  border-color: var(--teal-light);
+}
+
+.score-secondary-action:hover,
+.score-secondary-action:focus-visible {
+  border-color: var(--teal-light);
+  color: var(--teal-light);
+}
+
+.assessment-contact {
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  gap: clamp(3rem, 8vw, 8rem);
+  align-items: start;
+  border-top: 1px solid rgba(13, 31, 34, 0.12);
+  margin-top: clamp(4rem, 8vw, 7rem);
+  padding-top: clamp(3rem, 6vw, 5rem);
+}
+
+.assessment-contact-copy h2 {
+  margin: 1rem 0;
+  max-width: 12ch;
+}
+
+.assessment-contact-copy p,
+.assessment-form-intro {
+  color: var(--body-text);
+  line-height: 1.7;
+}
+
+.assessment-send-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.55rem;
+}
+
+.assessment-form-intro {
+  font-size: 0.86rem;
+  margin-bottom: 1.5rem;
+}
+
+.assessment-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  color: var(--body-text);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  margin: 0.25rem 0 1.25rem;
+  cursor: pointer;
+}
+
+.assessment-consent input {
+  accent-color: var(--teal);
+  margin-top: 0.18rem;
+}
+
+.assessment-form-status {
+  min-height: 1.25rem;
+  color: var(--body-text);
+  font-size: 0.78rem;
+  margin-top: 0.8rem;
+}
+
+.assessment-form-success {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.assessment-form-success h3 {
+  margin-bottom: 0.7rem;
+}
+
+.assessment-form-success p {
+  color: var(--body-text);
+  line-height: 1.6;
+}
+
 @media (max-width: 1024px) {
   nav {
     padding: 0 1.5rem;
@@ -2755,5 +2866,98 @@ footer {
   .hero-photo-wrap {
     opacity: 1;
     transform: none;
+  }
+}
+
+
+@media (max-width: 1024px) {
+  .assessment-contact {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .assessment-contact-copy h2 {
+    max-width: 18ch;
+  }
+}
+
+@media print {
+  nav,
+  .mob-menu,
+  .inner-hero,
+  .assessment-contact,
+  .inner-cta,
+  footer,
+  .assessment-result-actions,
+  .score-reset {
+    display: none !important;
+  }
+
+  body,
+  .inner-page,
+  .inner-main,
+  .inner-content {
+    background: #fff !important;
+  }
+
+  .inner-main {
+    padding-top: 0 !important;
+  }
+
+  .inner-content {
+    padding: 0 !important;
+  }
+
+  .checklist-intro {
+    display: grid !important;
+    grid-template-columns: 220px 1fr !important;
+    gap: 24px !important;
+    padding: 0 !important;
+  }
+
+  .score-card {
+    position: static !important;
+    background: #fff !important;
+    color: #0d1f22 !important;
+    border: 1px solid rgba(13, 31, 34, 0.2);
+    padding: 20px !important;
+  }
+
+  .score-card p,
+  .readiness-score span,
+  .score-count {
+    color: #334447 !important;
+  }
+
+  .score-eyebrow,
+  .priority-wrap h4 {
+    color: #007a65 !important;
+  }
+
+  .priority-wrap {
+    border-color: rgba(13, 31, 34, 0.2) !important;
+  }
+
+  .priority-wrap li {
+    color: #0d1f22 !important;
+  }
+
+  .checklist-groups {
+    gap: 12px !important;
+  }
+
+  .checklist-group {
+    break-inside: avoid;
+    padding: 16px !important;
+  }
+
+  .check-item {
+    padding: 6px 0 !important;
+  }
+
+  .check-item input:checked + .check-box {
+    background: #007a65 !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
   }
 }
