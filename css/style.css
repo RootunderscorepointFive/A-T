@@ -1764,14 +1764,19 @@ footer {
   font-size: 0.9rem;
 }
 
+.ledgrflow-bridge {
+  background: var(--cream);
+  padding: 5rem 0;
+}
+
 .ledgrflow-heading {
   max-width: 900px;
-  margin-bottom: 3.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .ledgrflow-heading h2 {
   color: var(--ink);
-  font-size: clamp(2.8rem, 5vw, 5.8rem);
+  font-size: clamp(2.6rem, 4.5vw, 4.9rem);
   line-height: 0.96;
   letter-spacing: -0.055em;
   margin: 1.2rem 0 1.5rem;
@@ -1790,7 +1795,7 @@ footer {
 
 .ledgrflow-showcase {
   display: grid;
-  grid-template-columns: minmax(330px, 0.72fr) minmax(0, 1.28fr);
+  grid-template-columns: minmax(330px, 0.78fr) minmax(0, 1.22fr);
   background: #0f6e56;
   overflow: hidden;
   border-radius: 6px;
@@ -1798,7 +1803,7 @@ footer {
 }
 
 .ledgrflow-product-copy {
-  padding: clamp(2.5rem, 4vw, 4.5rem);
+  padding: clamp(2.4rem, 3.5vw, 3.8rem);
   color: #f5f2ec;
   display: flex;
   flex-direction: column;
@@ -1872,41 +1877,46 @@ footer {
 }
 
 .ledgrflow-screen {
-  display: block;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   min-width: 0;
-  min-height: 590px;
+  min-height: 510px;
   overflow: hidden;
   text-decoration: none;
   background: #dfeae5;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .ledgrflow-dashboard {
-  width: 100%;
-  height: 100%;
-  min-height: 590px;
+  width: 90%;
+  height: auto;
+  max-height: 410px;
   display: block;
-  object-fit: cover;
-  object-position: left top;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 5px;
+  box-shadow: 0 20px 45px rgba(13, 31, 34, 0.16);
   transition: transform 0.6s var(--ease-out);
 }
 
 .ledgrflow-screen:hover .ledgrflow-dashboard {
-  transform: scale(1.015);
+  transform: translateY(-3px);
 }
 
 .screen-caption {
-  position: absolute;
-  right: 1.5rem;
-  bottom: 1.5rem;
-  background: #f5f2ec;
-  color: #0f6e56;
+  position: static;
+  align-self: flex-end;
+  margin-top: 1.25rem;
+  background: var(--ink);
+  color: #f5f2ec;
   padding: 0.8rem 1rem;
   font-size: 0.66rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  box-shadow: 0 10px 25px rgba(13, 31, 34, 0.1);
+  box-shadow: none;
 }
 
 .process-section {
@@ -2398,7 +2408,12 @@ footer {
   }
 
   .ledgrflow-screen {
-    min-height: 470px;
+    min-height: 450px;
+  }
+
+  .ledgrflow-dashboard {
+    width: min(92%, 720px);
+    max-height: 360px;
   }
 
 
@@ -2500,15 +2515,24 @@ footer {
     border-bottom: none;
   }
 
-  .ledgrflow-screen,
-  .ledgrflow-dashboard {
-    min-height: 390px;
+  .ledgrflow-bridge {
+    padding: 4rem 0;
   }
 
+  .ledgrflow-screen {
+    min-height: 0;
+    padding: 1.25rem;
+  }
+
+  .ledgrflow-dashboard {
+    width: 100%;
+    max-height: none;
+  }
 
   .screen-caption {
-    right: 1rem;
-    bottom: 1rem;
+    align-self: stretch;
+    text-align: center;
+    margin-top: 1rem;
   }
 
   .ledgrflow-actions {
