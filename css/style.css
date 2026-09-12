@@ -327,16 +327,12 @@ nav.scrolled {
   margin-bottom: 1.5rem;
   opacity: 0;
   animation: slideUp 0.9s var(--ease-out) 0.5s forwards;
-  background: linear-gradient(135deg, #fff 0%, var(--white-50) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .hero-h1 em,
 .h2-dark em {
   font-style: normal;
   color: var(--teal);
-  -webkit-text-fill-color: var(--teal);
 }
 
 .hero-sub {
