@@ -266,31 +266,6 @@ nav.scrolled {
 }
 
 
-.hero-glow {
-  position: absolute;
-  width: 800px;
-  height: 800px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 154, 170, 0.14) 0%, transparent 65%);
-  top: 50%;
-  left: 30%;
-  transform: translate(-50%, -50%);
-  animation: glowpulse 7s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes glowpulse {
-  0%, 100% {
-    opacity: 0.6;
-    transform: translate(-50%, -50%) scale(1);
-  }
-
-  50% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.12);
-  }
-}
-
 .hero-inner {
   max-width: 1260px;
   margin: 0 auto;
@@ -2563,7 +2538,6 @@ footer {
     scroll-behavior: auto !important;
   }
 
-  .hero-glow,
   .hero-scroll,
   .ticker-track {
     animation: none !important;
