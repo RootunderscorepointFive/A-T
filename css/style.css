@@ -677,21 +677,12 @@ nav.scrolled {
 .tag {
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--teal);
   margin-bottom: 0.85rem;
-}
-
-.tag::before {
-  content: "";
-  width: 22px;
-  height: 1px;
-  background: var(--teal);
-  display: block;
 }
 
 .tag-on-dark {
