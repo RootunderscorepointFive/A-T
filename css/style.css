@@ -265,18 +265,6 @@ nav.scrolled {
   padding-top: 70px;
 }
 
-#home::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(var(--white-08) 1px, transparent 1px),
-    linear-gradient(90deg, var(--white-08) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 20%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 20%, transparent 100%);
-  opacity: 0.35;
-}
 
 .hero-glow {
   position: absolute;
@@ -319,7 +307,6 @@ nav.scrolled {
 .hero-eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 0.7rem;
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -330,13 +317,6 @@ nav.scrolled {
   animation: slideUp 0.8s var(--ease-out) 0.3s forwards;
 }
 
-.hero-eyebrow::before {
-  content: "";
-  width: 28px;
-  height: 1px;
-  background: var(--teal);
-  display: block;
-}
 
 .hero-h1 {
   font-size: clamp(2.6rem, 5vw, 5rem);
@@ -580,34 +560,8 @@ nav.scrolled {
   animation: fadeInScroll 1s var(--ease-out) 1.5s both;
 }
 
-.hero-scroll-line {
-  width: 1px;
-  height: 40px;
-  background: var(--teal);
-  animation: scrollLine 2s ease-in-out infinite;
-}
 
-@keyframes scrollLine {
-  0% {
-    transform: scaleY(0);
-    transform-origin: top;
-  }
 
-  50% {
-    transform: scaleY(1);
-    transform-origin: top;
-  }
-
-  51% {
-    transform: scaleY(1);
-    transform-origin: bottom;
-  }
-
-  100% {
-    transform: scaleY(0);
-    transform-origin: bottom;
-  }
-}
 
 @keyframes fadeInScroll {
   from {
