@@ -104,7 +104,7 @@ nav.scrolled {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--white-08);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+  box-shadow: none;
 }
 
 .nav-logo {
@@ -185,8 +185,8 @@ nav.scrolled {
 
 .nav-cta:hover {
   background: var(--teal-light);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 154, 170, 0.3);
+  transform: none;
+  box-shadow: none;
 }
 
 .hamburger {
@@ -360,8 +360,8 @@ nav.scrolled {
 
 .btn-teal:hover {
   background: var(--teal-light);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(0, 154, 170, 0.3);
+  transform: none;
+  box-shadow: none;
 }
 
 .btn-teal:hover::after,
@@ -437,7 +437,7 @@ nav.scrolled {
   aspect-ratio: 4 / 5;
   object-fit: cover;
   border-radius: 4px;
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+  box-shadow: none;
   display: block;
 }
 
@@ -456,7 +456,7 @@ nav.scrolled {
   color: var(--ink);
   padding: 1.1rem 1.6rem;
   border-radius: 2px;
-  box-shadow: 0 16px 40px rgba(0, 154, 170, 0.35);
+  box-shadow: none;
 }
 
 .hero-badge-num {
@@ -494,7 +494,7 @@ nav.scrolled {
   height: 8px;
   background: #4ade80;
   border-radius: 50%;
-  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.2);
+  box-shadow: none;
   animation: blink 2s ease-in-out infinite;
 }
 
@@ -757,7 +757,7 @@ nav.scrolled {
   position: relative;
   border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
+  box-shadow: none;
 }
 
 .company-photo {
@@ -770,7 +770,7 @@ nav.scrolled {
 }
 
 .company-photo-wrap:hover .company-photo {
-  transform: scale(1.03);
+  transform: none;
   filter: brightness(1) saturate(1);
 }
 
@@ -1100,8 +1100,8 @@ nav.scrolled {
 }
 
 .team-card:hover .tc-badge {
-  transform: scale(1.08);
-  box-shadow: 0 6px 20px rgba(0, 154, 170, 0.25);
+  transform: none;
+  box-shadow: none;
 }
 
 .tc-badge-compact {
@@ -1328,7 +1328,7 @@ nav.scrolled {
 
 .fc:focus {
   border-color: var(--teal);
-  box-shadow: 0 0 0 3px rgba(0, 154, 170, 0.08);
+  box-shadow: none;
 }
 
 .fc.err {
@@ -1401,8 +1401,8 @@ textarea.fc {
 }
 
 .btn-submit:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(0, 154, 170, 0.3);
+  transform: none;
+  box-shadow: none;
 }
 
 .btn-submit:disabled {
@@ -1431,7 +1431,7 @@ textarea.fc {
   align-items: center;
   justify-content: center;
   margin: 0 auto 1.5rem;
-  box-shadow: 0 10px 24px rgba(0, 154, 170, 0.2);
+  box-shadow: none;
 }
 
 .form-success h3 {
@@ -1560,7 +1560,7 @@ footer {
 
 .social-link:hover {
   color: var(--teal);
-  transform: translateY(-2px);
+  transform: none;
 }
 
 #toast {
@@ -1609,7 +1609,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 12px 28px rgba(0, 154, 170, 0.35);
+  box-shadow: none;
   z-index: 9990;
   text-decoration: none;
   transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
@@ -1621,8 +1621,8 @@ footer {
 }
 
 .wa-float:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 36px rgba(0, 154, 170, 0.45);
+  transform: none;
+  box-shadow: none;
 }
 
 @keyframes slideUp {
@@ -1799,7 +1799,7 @@ footer {
   background: #0f6e56;
   overflow: hidden;
   border-radius: 6px;
-  box-shadow: 0 28px 70px rgba(13, 31, 34, 0.16);
+  box-shadow: none;
 }
 
 .ledgrflow-product-copy {
@@ -1897,12 +1897,12 @@ footer {
   object-fit: contain;
   object-position: center;
   border-radius: 5px;
-  box-shadow: 0 20px 45px rgba(13, 31, 34, 0.16);
+  box-shadow: none;
   transition: transform 0.6s var(--ease-out);
 }
 
 .ledgrflow-screen:hover .ledgrflow-dashboard {
-  transform: translateY(-3px);
+  transform: none;
 }
 
 .screen-caption {
@@ -1973,7 +1973,7 @@ footer {
   color: var(--ink);
   padding: 1.25rem 1.35rem;
   backdrop-filter: blur(14px);
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+  box-shadow: none;
 }
 
 .insight-label {
@@ -2044,7 +2044,7 @@ footer {
   background: var(--cream);
   border: 1px solid rgba(13, 31, 34, 0.12);
   padding: clamp(2rem, 4vw, 3.5rem);
-  box-shadow: 0 24px 55px rgba(13, 31, 34, 0.1);
+  box-shadow: none;
 }
 
 .resource-kicker {
@@ -2259,7 +2259,7 @@ footer {
   background: #fff;
   padding: clamp(2rem, 5vw, 4rem);
   border: 1px solid rgba(13, 31, 34, 0.1);
-  box-shadow: 0 24px 60px rgba(13, 31, 34, 0.08);
+  box-shadow: none;
 }
 
 .light-form .fg label {
