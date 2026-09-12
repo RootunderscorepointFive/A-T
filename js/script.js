@@ -329,3 +329,196 @@
     });
   }
 })();
+
+
+(function () {
+  "use strict";
+
+  const assessment = document.getElementById("readiness-assessment");
+  if (!assessment) {
+    return;
+  }
+
+  const checkboxes = Array.from(assessment.querySelectorAll('input[type="checkbox"]'));
+  const groups = Array.from(assessment.querySelectorAll(".checklist-group"));
+  const scoreValue = document.getElementById("score-value");
+  const scoreProgress = document.getElementById("score-progress");
+  const scoreLabel = document.getElementById("score-label");
+  const scoreSummary = document.getElementById("score-summary");
+  const scoreCount = document.getElementById("score-count");
+  const priorityWrap = document.getElementById("priority-wrap");
+  const priorityList = document.getElementById("priority-list");
+  const reset = document.getElementById("score-reset");
+  const printButton = document.getElementById("assessment-print");
+  const resultForm = document.getElementById("assessment-form");
+  const resultFormBody = document.getElementById("assessment-form-body");
+  const resultFormSuccess = document.getElementById("assessment-form-success");
+  const resultSubmit = document.getElementById("assessment-submit");
+  const resultStatus = document.getElementById("assessment-form-status");
+  const resultField = document.getElementById("assessment-result-field");
+  const priorityField = document.getElementById("assessment-priority-field");
+  const areaFields = [
+    document.getElementById("assessment-monthly-field"),
+    document.getElementById("assessment-tax-field"),
+    document.getElementById("assessment-reporting-field"),
+    document.getElementById("assessment-systems-field")
+  ];
+  const shortLabels = [
+    "Transactions recorded monthly",
+    "Bank and credit accounts reconciled",
+    "Personal and business expenses separated",
+    "Receivables and payables reviewed",
+    "VAT treatment correct",
+    "SARS submissions fully supported",
+    "Payroll agrees to payments and submissions",
+    "Filing dates tracked in advance",
+    "Current management reports available",
+    "Cash flow reviewed before commitments",
+    "Actuals compared with budget or forecast",
+    "Profit and cash drivers understood",
+    "Supporting documents easy to retrieve",
+    "Financial system access controlled",
+    "Accounting responsibilities assigned",
+    "Data export and backup available"
+  ];
+
+  function getResult(score, checked) {
+    if (checked === 0) {
+      return {
+        label: "Start the assessment",
+        summary: "Select every statement that is consistently true in your business."
+      };
+    }
+    if (score < 40) {
+      return {
+        label: "Immediate attention needed",
+        summary: "Important accounting foundations are missing. Start with the priority areas below before the gaps create more risk."
+      };
+    }
+    if (score < 70) {
+      return {
+        label: "Foundation in progress",
+        summary: "Some good practices are in place, but inconsistency may still affect reporting, compliance, and decisions."
+      };
+    }
+    if (score < 88) {
+      return {
+        label: "Mostly ready",
+        summary: "Your accounting foundation is working. Closing the remaining gaps will make it more dependable and decision-ready."
+      };
+    }
+    return {
+      label: "Ready to support growth",
+      summary: "Your core practices are in good shape. Keep them consistent and review them as the business becomes more complex."
+    };
+  }
+
+  function buildAreaSummary(group) {
+    const boxes = Array.from(group.querySelectorAll('input[type="checkbox"]'));
+    const confirmed = [];
+    const gaps = [];
+
+    boxes.forEach(function (box) {
+      const label = shortLabels[checkboxes.indexOf(box)];
+      if (box.checked) {
+        confirmed.push(label);
+      } else {
+        gaps.push(label);
+      }
+    });
+
+    return "Confirmed (" + confirmed.length + "/4): " + (confirmed.join("; ") || "None") +
+      "\nGaps (" + gaps.length + "/4): " + (gaps.join("; ") || "None");
+  }
+
+  function updateAssessment() {
+    const checked = checkboxes.filter(function (box) { return box.checked; }).length;
+    const score = Math.round((checked / checkboxes.length) * 100);
+    const result = getResult(score, checked);
+    const priorities = groups.filter(function (group) {
+      return group.querySelectorAll('input[type="checkbox"]:checked').length < 3;
+    }).map(function (group) {
+      return group.getAttribute("data-area");
+    });
+
+    scoreValue.textContent = String(score);
+    scoreProgress.style.width = score + "%";
+    scoreLabel.textContent = result.label;
+    scoreSummary.textContent = result.summary;
+    scoreCount.textContent = String(checked);
+
+    priorityList.innerHTML = "";
+    priorities.forEach(function (area) {
+      const item = document.createElement("li");
+      item.textContent = area;
+      priorityList.appendChild(item);
+    });
+    priorityWrap.hidden = checked === 0 || priorities.length === 0;
+
+    if (resultField) {
+      const level = checked === 0 ? "Not started" : result.label;
+      resultField.value = score + "/100 | " + level + " | " + checked + " of " +
+        checkboxes.length + " practices confirmed";
+      priorityField.value = priorities.length ? priorities.join(", ") : "None";
+      groups.forEach(function (group, index) {
+        areaFields[index].value = buildAreaSummary(group);
+      });
+    }
+  }
+
+  checkboxes.forEach(function (box) {
+    box.addEventListener("change", updateAssessment);
+  });
+
+  if (reset) {
+    reset.addEventListener("click", function () {
+      checkboxes.forEach(function (box) {
+        box.checked = false;
+      });
+      updateAssessment();
+      checkboxes[0].focus();
+    });
+  }
+
+  if (printButton) {
+    printButton.addEventListener("click", function () {
+      window.print();
+    });
+  }
+
+  if (resultForm) {
+    resultForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      if (!resultForm.checkValidity()) {
+        resultForm.reportValidity();
+        return;
+      }
+
+      const originalText = resultSubmit.textContent;
+      resultSubmit.disabled = true;
+      resultSubmit.textContent = "Sending assessment...";
+      resultStatus.textContent = "Sending your result securely to A&T.";
+
+      fetch(resultForm.action, {
+        method: "POST",
+        body: new FormData(resultForm),
+        headers: { Accept: "application/json" }
+      }).then(function (response) {
+        if (!response.ok) {
+          throw new Error("Submission failed");
+        }
+        resultFormBody.hidden = true;
+        resultFormSuccess.hidden = false;
+        resultStatus.textContent = "";
+        resultForm.reset();
+      }).catch(function () {
+        resultStatus.textContent = "We could not send the assessment. Please try again or contact A&T directly.";
+      }).finally(function () {
+        resultSubmit.disabled = false;
+        resultSubmit.textContent = originalText;
+      });
+    });
+  }
+
+  updateAssessment();
+})();
