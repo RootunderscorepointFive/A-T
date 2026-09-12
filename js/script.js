@@ -355,11 +355,32 @@
   const resultFormSuccess = document.getElementById("assessment-form-success");
   const resultSubmit = document.getElementById("assessment-submit");
   const resultStatus = document.getElementById("assessment-form-status");
-  const scoreField = document.getElementById("assessment-score-field");
-  const levelField = document.getElementById("assessment-level-field");
-  const countField = document.getElementById("assessment-count-field");
+  const resultField = document.getElementById("assessment-result-field");
   const priorityField = document.getElementById("assessment-priority-field");
-  const detailsField = document.getElementById("assessment-details-field");
+  const areaFields = [
+    document.getElementById("assessment-monthly-field"),
+    document.getElementById("assessment-tax-field"),
+    document.getElementById("assessment-reporting-field"),
+    document.getElementById("assessment-systems-field")
+  ];
+  const shortLabels = [
+    "Transactions recorded monthly",
+    "Bank and credit accounts reconciled",
+    "Personal and business expenses separated",
+    "Receivables and payables reviewed",
+    "VAT treatment correct",
+    "SARS submissions fully supported",
+    "Payroll agrees to payments and submissions",
+    "Filing dates tracked in advance",
+    "Current management reports available",
+    "Cash flow reviewed before commitments",
+    "Actuals compared with budget or forecast",
+    "Profit and cash drivers understood",
+    "Supporting documents easy to retrieve",
+    "Financial system access controlled",
+    "Accounting responsibilities assigned",
+    "Data export and backup available"
+  ];
 
   function getResult(score, checked) {
     if (checked === 0) {
@@ -392,23 +413,22 @@
     };
   }
 
-  function buildAssessmentDetails() {
-    return groups.map(function (group) {
-      const area = group.getAttribute("data-area");
-      const items = Array.from(group.querySelectorAll(".check-item"));
-      const confirmed = items.filter(function (item) {
-        return item.querySelector('input[type="checkbox"]').checked;
-      }).map(function (item) {
-        return item.querySelector("span:last-child").textContent.trim();
-      });
-      const gaps = items.filter(function (item) {
-        return !item.querySelector('input[type="checkbox"]').checked;
-      }).map(function (item) {
-        return item.querySelector("span:last-child").textContent.trim();
-      });
-      return area + " | Confirmed: " + (confirmed.join("; ") || "None") +
-        " | Gaps: " + (gaps.join("; ") || "None");
-    }).join("\n");
+  function buildAreaSummary(group) {
+    const boxes = Array.from(group.querySelectorAll('input[type="checkbox"]'));
+    const confirmed = [];
+    const gaps = [];
+
+    boxes.forEach(function (box) {
+      const label = shortLabels[checkboxes.indexOf(box)];
+      if (box.checked) {
+        confirmed.push(label);
+      } else {
+        gaps.push(label);
+      }
+    });
+
+    return "Confirmed (" + confirmed.length + "/4): " + (confirmed.join("; ") || "None") +
+      "\nGaps (" + gaps.length + "/4): " + (gaps.join("; ") || "None");
   }
 
   function updateAssessment() {
@@ -435,12 +455,14 @@
     });
     priorityWrap.hidden = checked === 0 || priorities.length === 0;
 
-    if (scoreField) {
-      scoreField.value = score + "/100";
-      levelField.value = checked === 0 ? "Not started" : result.label;
-      countField.value = checked + " of " + checkboxes.length;
-      priorityField.value = priorities.length ? priorities.join(", ") : "No priority areas identified";
-      detailsField.value = buildAssessmentDetails();
+    if (resultField) {
+      const level = checked === 0 ? "Not started" : result.label;
+      resultField.value = score + "/100 | " + level + " | " + checked + " of " +
+        checkboxes.length + " practices confirmed";
+      priorityField.value = priorities.length ? priorities.join(", ") : "None";
+      groups.forEach(function (group, index) {
+        areaFields[index].value = buildAreaSummary(group);
+      });
     }
   }
 
