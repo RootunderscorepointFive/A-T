@@ -2516,6 +2516,10 @@ footer {
     gap: 3rem;
   }
 
+  .score-card {
+    position: static;
+  }
+
   .services-grid {
     grid-template-columns: 1fr 1fr;
   }
