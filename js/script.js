@@ -349,6 +349,17 @@
   const priorityWrap = document.getElementById("priority-wrap");
   const priorityList = document.getElementById("priority-list");
   const reset = document.getElementById("score-reset");
+  const printButton = document.getElementById("assessment-print");
+  const resultForm = document.getElementById("assessment-form");
+  const resultFormBody = document.getElementById("assessment-form-body");
+  const resultFormSuccess = document.getElementById("assessment-form-success");
+  const resultSubmit = document.getElementById("assessment-submit");
+  const resultStatus = document.getElementById("assessment-form-status");
+  const scoreField = document.getElementById("assessment-score-field");
+  const levelField = document.getElementById("assessment-level-field");
+  const countField = document.getElementById("assessment-count-field");
+  const priorityField = document.getElementById("assessment-priority-field");
+  const detailsField = document.getElementById("assessment-details-field");
 
   function getResult(score, checked) {
     if (checked === 0) {
@@ -381,6 +392,25 @@
     };
   }
 
+  function buildAssessmentDetails() {
+    return groups.map(function (group) {
+      const area = group.getAttribute("data-area");
+      const items = Array.from(group.querySelectorAll(".check-item"));
+      const confirmed = items.filter(function (item) {
+        return item.querySelector('input[type="checkbox"]').checked;
+      }).map(function (item) {
+        return item.querySelector("span:last-child").textContent.trim();
+      });
+      const gaps = items.filter(function (item) {
+        return !item.querySelector('input[type="checkbox"]').checked;
+      }).map(function (item) {
+        return item.querySelector("span:last-child").textContent.trim();
+      });
+      return area + " | Confirmed: " + (confirmed.join("; ") || "None") +
+        " | Gaps: " + (gaps.join("; ") || "None");
+    }).join("\n");
+  }
+
   function updateAssessment() {
     const checked = checkboxes.filter(function (box) { return box.checked; }).length;
     const score = Math.round((checked / checkboxes.length) * 100);
@@ -404,6 +434,14 @@
       priorityList.appendChild(item);
     });
     priorityWrap.hidden = checked === 0 || priorities.length === 0;
+
+    if (scoreField) {
+      scoreField.value = score + "/100";
+      levelField.value = checked === 0 ? "Not started" : result.label;
+      countField.value = checked + " of " + checkboxes.length;
+      priorityField.value = priorities.length ? priorities.join(", ") : "No priority areas identified";
+      detailsField.value = buildAssessmentDetails();
+    }
   }
 
   checkboxes.forEach(function (box) {
@@ -417,6 +455,46 @@
       });
       updateAssessment();
       checkboxes[0].focus();
+    });
+  }
+
+  if (printButton) {
+    printButton.addEventListener("click", function () {
+      window.print();
+    });
+  }
+
+  if (resultForm) {
+    resultForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      if (!resultForm.checkValidity()) {
+        resultForm.reportValidity();
+        return;
+      }
+
+      const originalText = resultSubmit.textContent;
+      resultSubmit.disabled = true;
+      resultSubmit.textContent = "Sending assessment...";
+      resultStatus.textContent = "Sending your result securely to A&T.";
+
+      fetch(resultForm.action, {
+        method: "POST",
+        body: new FormData(resultForm),
+        headers: { Accept: "application/json" }
+      }).then(function (response) {
+        if (!response.ok) {
+          throw new Error("Submission failed");
+        }
+        resultFormBody.hidden = true;
+        resultFormSuccess.hidden = false;
+        resultStatus.textContent = "";
+        resultForm.reset();
+      }).catch(function () {
+        resultStatus.textContent = "We could not send the assessment. Please try again or contact A&T directly.";
+      }).finally(function () {
+        resultSubmit.disabled = false;
+        resultSubmit.textContent = originalText;
+      });
     });
   }
 
